@@ -1,17 +1,32 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <main>
+    <Header></Header>
+    <Weather></Weather>
+    <Footer :year="year"></Footer>
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue'
+import Weather from './components/Weather.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Header,
+    Weather,
+    Footer
+  },
+  data () {
+    return {
+      date: new Date()
+    }
+  },
+  computed: {
+    year() {
+      return this.date.getFullYear()
+    }
   }
 }
 </script>
