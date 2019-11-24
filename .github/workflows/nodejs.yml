@@ -6,14 +6,15 @@ on:
       - master
       - gh-pages
 jobs:
-  develop:
+  staging:
     name: Merging to master
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [12.x]
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/first-interaction@master
+    - uses: actions/first-interaction@gh-pages
       with:
         node-version: '12.x'
     - run: yarn global add @vue/cli
@@ -22,7 +23,7 @@ jobs:
     - run: yarn lint
     - run: yarn build
   
-  deploy:
+  deployment:
     name: Deploying to gh-pages
     runs-on: ubuntu-latest
     strategy:
