@@ -17,7 +17,7 @@ jobs:
       with:
         node-version: '12.x'
     - run: yarn global add @vue/cli
-    - run: yarn global add -s dev
+    - run: yarn install
     - run: yarn -s dev
     - run: yarn lint
     - run: yarn build
@@ -33,7 +33,7 @@ jobs:
       with:
         node-version: '12.x'
     - run: yarn global add @vue/cli
-    - run: yarn global add -s dev
+    - run: yarn install
     - run: yarn -s dev
     - run: yarn lint  
     - run: yarn build
