@@ -125,7 +125,7 @@ export default {
     methods: {
         async fetchWeatherData () {
             const axios = require('axios').default;
-            const api_uri = 'http://api.openweathermap.org/data/2.5/weather?lat=' + this.lat + '&&lon=' + this.lon + '&&appid=' + this.API_KEY;
+            const api_uri = 'https://api.openweathermap.org/data/2.5/weather?lat=' + this.lat + '&&lon=' + this.lon + '&&appid=' + this.API_KEY;
             
             if (this.isLocation) {
                 try {
