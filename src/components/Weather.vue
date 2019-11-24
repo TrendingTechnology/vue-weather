@@ -19,7 +19,7 @@
 
 
             <!-- weather information start -->
-            <ul class="text-center" style="margin-top: 50px">
+            <ul class="text-center" style="margin-top: 80px">
                 <li>
                     <div style="font-size: 76px; padding-bottom: 20px" class="text-warning">
                         <span>{{weatherData.temperature}}</span> &deg;C
