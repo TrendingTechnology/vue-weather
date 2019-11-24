@@ -138,7 +138,6 @@ export default {
             } else {
                 alert("Please allow to access your location first!")
             }
-            
         },
         setWeatherData (data) {
             // basic
@@ -158,7 +157,6 @@ export default {
             this.weatherData.temperature = (data.main.temp - 273.15).toFixed(1);
             this.weatherData.min_temperature = (data.main.temp_min - 273.15).toFixed(1);
             this.weatherData.max_temperature = (data.main.temp_max - 273.15).toFixed(1);
-            
         }
     },
 }
@@ -185,5 +183,4 @@ li {
     box-shadow: none!important;
     font-weight: bold;
 }
-
 </style>
