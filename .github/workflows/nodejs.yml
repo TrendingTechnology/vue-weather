@@ -3,18 +3,19 @@ name: Node CI
 on:
   push:
     branches: 
-      - master
       - gh-pages
+  pull_request:
+    branches: 
+      - master
 jobs:
   staging:
-    name: Merging to master
+    name: Pull request to master
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [12.x]
     steps:
     - uses: actions/first-interaction@master
-    - uses: actions/first-interaction@gh-pages
       with:
         node-version: '12.x'
     - run: yarn global add @vue/cli
