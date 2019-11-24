@@ -1,23 +1,25 @@
 <template>
-    <header class="container-fluid bg-info">
+    <header class="container-fluid">
         <nav class="container">
-            <h1 class="text-center text-light pt-3 pb-3">Vue Weather App</h1>
+            <h1 class="text-center text-info">
+                Quick Weather<br>
+                <small class="text-secondary">- powered by Vue.js</small>
+            </h1>
         </nav>
+        <hr>
     </header>
 </template>
 
 <script>
 export default {
     name: "Header",
-
 }
 </script>
 
 <style scoped>
-body {
-  font-family: 'Open Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: rgba(255, 255, 255, 0.9);
-}
+    header {
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    small {font-size: 12px; font-weight: normal !important}
 </style>

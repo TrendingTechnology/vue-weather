@@ -1,7 +1,7 @@
 <template>
-    <footer class="container-fluid bg-info">
+    <footer class="container-fluid">
         <nav class="container">
-            <div class="text-center text-light pt-3 pb-3">
+            <div class="text-center text-secondary">
                 &copy; {{ year }} rk4bir.github.io
             </div>
         </nav>
@@ -19,3 +19,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+footer {
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main id='app'>
     <Header></Header>
     <Weather></Weather>
     <Footer :year="year"></Footer>
@@ -32,12 +32,42 @@ export default {
 </script>
 
 <style>
+body{
+  background-color: #2c3e50;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
+.container-fluid {
+    width: 100%;
+}
+.container {
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 80%;
+}
+.text-left {text-align: left}
+.text-center {text-align: center}
+.text-right {text-align: right}
+
+.bg-info {background: rgb(7, 218, 189)}
+.bg-success {background: rgb(13, 199, 13)}
+.bg-warning {background: rgb(248, 232, 9)}
+.bg-danger {background: rgb(219, 12, 40)}
+.bg-light {background: #f5f5f5}
+.bg-white {background: #ffffff}
+.bg-dark {background: black}
+
+.text-info {color: rgb(7, 218, 189)}
+.text-success {color: rgb(13, 199, 13)}
+.text-warning {color: rgb(248, 232, 9)}
+.text-danger {color: rgb(219, 12, 40)}
+.text-light {color: #f5f5f5}
+.text-white {color: #ffffff}
+.text-secondary {color: darkgray}
+.text-dark {color: black}
 </style>

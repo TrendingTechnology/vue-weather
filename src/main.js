@@ -1,14 +1,18 @@
 import Vue from 'vue'
 import App from './App.vue'
-import BootstrapVue from 'bootstrap-vue'
-
-Vue.use(BootstrapVue)
-
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueGeolocation from 'vue-browser-geolocation';
 
 
+Vue.use(VueGeolocation);
 Vue.config.productionTip = false
+
+/* Template filter: capitalize */
+Vue.filter('capitalize', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+})
+
 
 new Vue({
   render: h => h(App),
