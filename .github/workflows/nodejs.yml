@@ -4,26 +4,8 @@ on:
   push:
     branches: 
       - gh-pages
-  pull_request:
-    branches: 
-      - master
+
 jobs:
-  staging:
-    name: Pull request to master
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
-    steps:
-    - uses: actions/first-interaction@master
-      with:
-        node-version: '12.x'
-    - run: yarn global add @vue/cli
-    - run: yarn install
-    - run: yarn -s dev
-    - run: yarn lint
-    - run: yarn build
-  
   deployment:
     name: Deploying to gh-pages
     runs-on: ubuntu-latest
