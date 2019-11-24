@@ -1,0 +1,42 @@
+name: Node CI
+
+on:
+  push:
+    branches: 
+      - master
+      - gh-pages
+jobs:
+  develop:
+    name: Merging to master
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+    steps:
+    - uses: actions/master@gh-pages
+      with:
+        node-version: '12.x'
+    - run: yarn global add @vue/cli
+    - run: yarn global add -s dev
+    - run: yarn -s dev
+    - run: yarn lint
+    - run: yarn build
+  
+  deploy:
+    name: Deploying to gh-pages
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+    steps:
+    - uses: actions/master@gh-pages
+      with:
+        node-version: '12.x'
+    - run: yarn global add @vue/cli
+    - run: yarn global add -s dev
+    - run: yarn -s dev
+    - run: yarn lint  
+    - run: yarn build
+    - run: rm -rf babel.config.js public src yarn-error.log deploy.sh README.md vue.config.js yarn.lock
+    - run: mv dist/* . && rmdir dist/
+  
