@@ -126,13 +126,19 @@ export default {
         async fetchWeatherData () {
             const axios = require('axios').default;
             const api_uri = 'http://api.openweathermap.org/data/2.5/weather?lat=' + this.lat + '&&lon=' + this.lon + '&&appid=' + this.API_KEY;
-            try {
-                const response = await axios.get(api_uri);
-                this.setWeatherData(response.data)
-                this.isWeather = true;
-            } catch (err) {
-                alert(err);
+            
+            if (this.isLocation) {
+                try {
+                    const response = await axios.get(api_uri);
+                    this.setWeatherData(response.data)
+                    this.isWeather = true;
+                } catch (err) {
+                    alert(err);
+                }
+            } else {
+                alert("Please allow to access your location first!")
             }
+            
         },
         setWeatherData (data) {
             // basic
