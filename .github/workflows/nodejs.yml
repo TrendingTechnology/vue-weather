@@ -1,26 +1,80 @@
 name: Node CI
 
-on:
+on: 
   push:
+    branches:
+       - gh-pages # execute `deploy job` on push@gh-pages
+  pull_request:
     branches: 
-      - gh-pages
+      - master    # execute `test job` on pull_request@master
 
 jobs:
-  deployment:
-    name: Deploying to gh-pages
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: step0- check pull_request action
+        uses: actions/pull_request@gh-pages
+
+      - name: step1- re-check pull_request event
+        if: github.event_name == 'pull_request'
+        
+      - name: step2- install dependencies and test vue app
+        with:
+          node-version: '12.x'
+          run: |
+            echo "Installing dependencies"
+            yarn global add @vue/cli
+            yarn install
+            
+            echo "Testing code with lint"
+            yarn lint 
+            
+            echo "Testing production"
+            yarn -s dev
+            
+            echo "Producing SPA in dist directory for production"
+            yarn build
+            echo "Finished testing"
+ 
+  deploy:
+    name: Deploy
+    needs: test # `deploy` should run after successfull execution of `test` job
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [12.x]
     steps:
-    - uses: actions/checkout@gh-pages
-      with:
-        node-version: '12.x'
-    - run: yarn global add @vue/cli
-    - run: yarn install
-    - run: yarn -s dev
-    - run: yarn lint  
-    - run: yarn build
-    - run: rm -rf babel.config.js public src yarn-error.log deploy.sh README.md vue.config.js yarn.lock
-    - run: mv dist/* . && rmdir dist/
-  
+      - name: step0- check push action
+        uses: actions/push@gh-pages
+      
+      - name: step1- re-check push event
+        if: github.event_name == 'push'
+      
+      - name: step2- install dependencies and produce dist/ directory
+        with:
+          node-version: '12.x'
+          run: |
+            echo "Installing dependencies"
+            yarn global add @vue/cli
+            yarn install
+            
+            echo "Testing codes with lint"
+            yarn lint
+            
+            echo "Testing production"
+            yarn -s dev
+            
+            echo "Producing SPA in dist directory for production"
+            yarn build
+            
+      - name: step3- remove files other than dist/ dir and mv dist/* files to root
+        run: |
+          echo "
+          rm -rf babel.config.js public src yarn-error.log deploy.sh README.md vue.config.js yarn.lock
+          mv dist/* . && rmdir dist/
+
