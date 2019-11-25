@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: test pull_request
-        uses: actions/pull_request@gh-pages
+        uses: actions/checkout@v1
         if: github.event_name == 'pull_request'        
         with:
           node-version: '12.x'
@@ -46,7 +46,7 @@ jobs:
         node-version: [12.x]
     steps:
       - name: deployment to gh-pages
-        uses: actions/push@gh-pages
+        uses: actions/checkout@v1
         if: github.event_name == 'push'
         with:
           node-version: '12.x'
