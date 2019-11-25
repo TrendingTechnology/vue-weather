@@ -17,13 +17,9 @@ jobs:
         node-version: [12.x]
 
     steps:
-      - name: step0- check pull_request action
+      - name: test pull_request
         uses: actions/pull_request@gh-pages
-
-      - name: step1- re-check pull_request event
-        if: github.event_name == 'pull_request'
-        
-      - name: step2- install dependencies and test vue app
+        if: github.event_name == 'pull_request'        
         with:
           node-version: '12.x'
           run: |
@@ -49,13 +45,9 @@ jobs:
       matrix:
         node-version: [12.x]
     steps:
-      - name: step0- check push action
+      - name: deployment to gh-pages
         uses: actions/push@gh-pages
-      
-      - name: step1- re-check push event
         if: github.event_name == 'push'
-      
-      - name: step2- install dependencies and produce dist/ directory
         with:
           node-version: '12.x'
           run: |
@@ -72,9 +64,9 @@ jobs:
             echo "Producing SPA in dist directory for production"
             yarn build
             
-      - name: step3- remove files other than dist/ dir and mv dist/* files to root
-        run: |
-          echo "
-          rm -rf babel.config.js public src yarn-error.log deploy.sh README.md vue.config.js yarn.lock
-          mv dist/* . && rmdir dist/
+            echo "Removing unwanted files"
+            rm -rf babel.config.js public src yarn-error.log deploy.sh README.md vue.config.js yarn.lock
+            
+            echo "Moving dist/ to root directory and removing dist/ dir"
+            mv dist/* . && rmdir dist/
 
